@@ -1,0 +1,24 @@
+{
+	"name": "@snakeroom/quasiplace",
+	"version": "1.0.0",
+	"private": true,
+	"description": "An implementation of r/Place that is compatible with the Mona Lisa frontend.",
+	"main": "./src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Snakeroom/Quasiplace.git"
+	},
+	"keywords": [
+		"place",
+		"server"
+	],
+	"author": "haykam821",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/Snakeroom/Quasiplace/issues"
+	},
+	"homepage": "https://github.com/Snakeroom/Quasiplace#readme"
+}
