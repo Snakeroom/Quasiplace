@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"downlevelIteration": true,
+		"esModuleInterop": true,
+		"lib": [
+			"es2022"
+		],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"outDir": "./dist",
+		"resolveJsonModule": true,
+		"rootDir": "./src",
+		"skipLibCheck": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"target": "es2015",
+		"types": [
+			"@types/debug",
+			"@types/fs-extra",
+			"@types/ws"
+		]
+	}
+}

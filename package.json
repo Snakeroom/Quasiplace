@@ -5,6 +5,10 @@
 	"description": "An implementation of r/Place that is compatible with the Mona Lisa frontend.",
 	"main": "./src/index.js",
 	"scripts": {
+		"build": "tsc",
+		"dev": "ts-node-dev --respawn ./src/index.ts",
+		"lint": "eslint \"./**/*.ts\" --ignore-path .gitignore",
+		"start": "node ./dist/index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -20,5 +24,50 @@
 	"bugs": {
 		"url": "https://github.com/Snakeroom/Quasiplace/issues"
 	},
-	"homepage": "https://github.com/Snakeroom/Quasiplace#readme"
+	"homepage": "https://github.com/Snakeroom/Quasiplace#readme",
+	"dependencies": {
+		"@apollo/server": "^4.5.0",
+		"@graphql-tools/schema": "^9.0.17",
+		"body-parser": "^1.20.2",
+		"canvas": "^2.11.2",
+		"debug": "^4.3.4",
+		"express": "^4.18.2",
+		"fs-extra": "^11.1.1",
+		"graphql": "^16.7.1",
+		"graphql-subscriptions": "^2.0.0",
+		"lru-cache": "^10.0.0",
+		"nanoid": "^3.3.6",
+		"subscriptions-transport-ws": "^0.11.0",
+		"supports-color": "^9.3.1",
+		"ws": "^8.13.0"
+	},
+	"devDependencies": {
+		"@types/debug": "^4.1.8",
+		"@types/fs-extra": "^11.0.1",
+		"@types/ws": "^8.5.5",
+		"@typescript-eslint/eslint-plugin": "^5.57.0",
+		"@typescript-eslint/parser": "^5.57.0",
+		"eslint": "^8.43.0",
+		"eslint-config-haykam": "^1.19.0",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.0.2"
+	},
+	"eslintConfig": {
+		"extends": [
+			"eslint-config-haykam",
+			"plugin:@typescript-eslint/eslint-recommended",
+			"plugin:@typescript-eslint/recommended"
+		],
+		"parser": "@typescript-eslint/parser",
+		"plugins": [
+			"@typescript-eslint"
+		],
+		"rules": {
+			"semi": "off",
+			"@typescript-eslint/semi": "error",
+			"no-shadow": "off",
+			"@typescript-eslint/no-shadow": "error",
+			"sort-imports": "error"
+		}
+	}
 }

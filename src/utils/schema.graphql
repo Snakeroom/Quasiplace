@@ -1,0 +1,188 @@
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}
+
+directive @generateActInput on OBJECT | INTERFACE | UNION
+
+directive @generateInput on OBJECT | INTERFACE | UNION
+
+directive @generatePublishInput on OBJECT | INTERFACE | UNION
+
+interface Message {
+	id: ID!
+}
+
+interface PublishResponse {
+	ok: Boolean!
+}
+
+union MessageData = ConfigurationMessageData | DiffFrameMessageData | FullFrameMessageData | GetTileHistoryResponseMessageData | GetUserCooldownResponseMessageData | PixelMessageData | SetPixelResponseMessageData | SetRectangleAreaMessageData
+
+type ActResponse {
+	data: [Message!]!
+}
+
+type BasicMessage implements Message {
+	data: MessageData!
+	id: ID!
+}
+
+type BasicPublishResponse implements PublishResponse {
+	ok: Boolean!
+}
+
+type CanvasConfiguration {
+	dx: Int!
+	dy: Int!
+	index: Int!
+}
+
+type Channel {
+	category: ChannelCategory!
+	postID: ID
+	subredditID: ID
+	tag: String
+	teamOwner: TeamOwner!
+	userID: ID
+}
+
+type Color {
+	hex: String!
+	index: Int!
+}
+
+type ColorPalette {
+	colors: [Color!]!
+}
+
+type ConfigurationMessageData {
+	canvasConfigurations: [CanvasConfiguration!]!
+	canvasHeight: Int!
+	canvasWidth: Int!
+	colorPalette: ColorPalette!
+}
+
+type DiffFrameMessageData {
+	currentTimestamp: Float!
+	name: String!
+	previousTimestamp: Float!
+}
+
+type FullFrameMessageData {
+	name: String!
+	timestamp: Float!
+}
+
+type GetTileHistoryResponseMessageData {
+	lastModifiedTimestamp: Float
+	userInfo: UserInfo
+}
+
+type GetUserCooldownResponseMessageData {
+	nextAvailablePixelTimestamp: Float
+}
+
+type Mutation {
+	act(input: ActInput!): ActResponse!
+	publish(input: PublishInput!): PublishResponse!
+}
+
+type PixelMessageData {
+	canvasIndex: Int!
+	colorIndex: Int!
+	coordinate: Point!
+}
+
+type Point {
+	x: Int!
+	y: Int!
+}
+
+type Query {
+	health: Boolean!
+}
+
+type SetPixelResponseMessageData {
+	timestamp: Float!
+}
+
+type SetRectangleAreaMessageData {
+	bottomRightCoordinate: Point!
+	canvasIndex: Int!
+	colorIndex: Int!
+	topLeftCoordinate: Point!
+}
+
+type Subscription {
+	subscribe(input: SubscribeInput!): Message!
+}
+
+type UserInfo {
+	userID: String!
+	username: String!
+}
+
+enum ChannelCategory {
+	CANVAS
+	CANVAS_FULL_FRAMES
+	CONFIG
+}
+
+enum TeamOwner {
+	AFD2022
+}
+
+input ActInput {
+	PixelMessageData: PixelMessageDataInput
+	SetRectangleAreaMessageData: SetRectangleAreaMessageDataInput
+	actionName: String!
+}
+
+input ChannelInput {
+	category: ChannelCategory!
+	postID: ID
+	subredditID: ID
+	tag: String
+	teamOwner: TeamOwner!
+	userID: ID
+}
+
+input DiffFrameMessageDataInput {
+	currentTimestamp: Float!
+	name: String!
+	previousTimestamp: Float!
+}
+
+input FullFrameMessageDataInput {
+	name: String!
+	timestamp: Float!
+}
+
+input PixelMessageDataInput {
+	canvasIndex: Int!
+	colorIndex: Int!
+	coordinate: PointInput!
+}
+
+input PointInput {
+	x: Int!
+	y: Int!
+}
+
+input PublishInput {
+	PixelMessageData: PixelMessageDataInput
+	channel: ChannelInput!
+}
+
+input SetRectangleAreaMessageDataInput {
+	bottomRightCoordinate: PointInput!
+	canvasIndex: Int!
+	colorIndex: Int!
+	topLeftCoordinate: PointInput!
+}
+
+input SubscribeInput {
+	channel: ChannelInput!
+}
