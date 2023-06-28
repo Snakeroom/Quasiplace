@@ -28,7 +28,7 @@ export class QuasiplaceApp {
 		new QuasiplaceCanvas(this, CANVAS_WIDTH, CANVAS_HEIGHT, "3"),
 	];
 
-	readonly imageCache = new LRUCache({
+	readonly imageCache = new LRUCache<string, Buffer>({
 		max: IMAGE_CACHE_MAXIMUM_SIZE,
 	});
 

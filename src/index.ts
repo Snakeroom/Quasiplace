@@ -47,7 +47,10 @@ async function start() {
 		const image = quasiplace.imageCache.get(id);
 
 		if (image) {
-			res.status(200).send(image);
+			res
+				.status(200)
+				.contentType("image/png")
+				.send(image);
 		} else {
 			res.sendStatus(404);
 		}
